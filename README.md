@@ -1,7 +1,7 @@
 # :handbag: Thrifting Haven :womans_clothes:
 
-## PWS application:
-(http://kusuma-ratih-thriftinghaven.pbp.cs.ui.ac.id/)
+## :paperclip: PWS application:
+http://kusuma-ratih-thriftinghaven.pbp.cs.ui.ac.id/
 
 ## :memo: How to implement the checklist
 
@@ -30,11 +30,11 @@ urllib3
 ```
 pip install -r requirements.txt
 ```
-+ Finally, we create a Django project named thrifting_haven by running the following command
+Finally, we create a Django project named thrifting_haven by running the following command
 ```
 django-admin startproject thrifting_haven .
 ```
-+ Lastly, we need to configure the project and run the server.
+Lastly, we need to configure the project and run the server.
 + To deploy we add the following to `ALLOWED_HOSTS` in `settings.py`:
 ```
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
@@ -43,15 +43,35 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 ```
 python manage.py runserver
 ```
-+ Once opening http://localhost:8000/ on your web browser shows a rocket animation, you stop the server by pressing `CTRL+C` and deactivate the virtual environment with the command
+
+### Create an application with the name `main` in the project
+
+Create a new application called main inside the thrifting-haven project by running the following command
 ```
-deactivate
+python manage.py startapp main
+```
+To go into the next step, we make sure that the `settings.py` file inside `thrifting_haven` project directory has 'main' added to the `INSTALL_APPS` variable as shown below
+```
+INSTALLED_APPS = [
+    ...,
+    'main'
+]
 ```
 
-### Create an application with the name main in the project
+### Perform routing in the project so that the application main can run
+In order to configure the URL routing for the 'main' application we need to:
++ Create a `urls.py` file in the `main` directory with the following contents:
+```
+from django.urls import path
+from main.views import show_main
 
+app_name = 'main'
 
-
+urlpatterns = [
+    path('', show_main, name='show_main'),
+]
+```
+LANJUT NNTI
 
 ## The diagram that contains the request client to a Django-based web application and the response it gives, and explain the relationship between urls.py, views.py, models.py, and the html file.
 
