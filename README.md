@@ -7,7 +7,7 @@
 
 1. Create a new Django Project
 In order to create a new Django Project we have to:
-Create a new directory named ==thrifting-haven== and open the command prompt inside the new directory.
+Create a new directory named `thrifting-haven` and open the command prompt inside the new directory.
 Create a virtual environment by running the command below
 ```
 python -m venv env
@@ -17,7 +17,7 @@ Then activate the virtual environment with the following command, indicated with
 env\Scripts\activate
 ```
 Afterwards, we set up dependencies in the same directory.
-Create a ==requirements.txt== file and add the following dependencies
+Create a `requirements.txt` file and add the following dependencies
 ```
 django
 gunicorn
@@ -35,13 +35,20 @@ Finally, we create a Django project named thrifting_haven by running the followi
 django-admin startproject thrifting_haven .
 ```
 Lastly, we need to configure the project and run the server.
-To deploy we add the following to ==ALLOWED_HOSTS== in ==settings.py:==
+To deploy we add the following to `ALLOWED_HOSTS` in `settings.py`:
 ```
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 ```
+Ensure `manage.py` is in the terminal’s active directory, then start the server with:
+```
+python manage.py runserver
+```
+Once opening http://localhost:8000/ on your web browser shows a rocket animation, then you stop the server by pressing `CTRL+C` and deactivate the virtual environment with the command
+```
+deactivate
+```
 
-
-
+2. Create an application with the name main in the project
 
 
 
