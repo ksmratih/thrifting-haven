@@ -46,7 +46,7 @@ python manage.py runserver
 
 ### Create an application with the name `main` in the project
 
-Create a new application called main inside the thrifting-haven project by running the following command
+Create a new application called `main` inside the `thrifting-haven` project by running the following command
 ```
 python manage.py startapp main
 ```
@@ -71,7 +71,11 @@ urlpatterns = [
     path('', show_main, name='show_main'),
 ]
 ```
-LANJUT NNTI
+
+### Create a model in the application `main` with the name `Product` and have the mandatory attributes `name`, `price`, and `description`
+
+
+
 
 ## The diagram that contains the request client to a Django-based web application and the response it gives, and explain the relationship between urls.py, views.py, models.py, and the html file.
 
