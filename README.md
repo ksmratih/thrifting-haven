@@ -129,12 +129,13 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1","kusuma-ratih-thriftinghaven.pbp.cs.ui
 ```
 + Do a git `add`, `commit`, and `push` for deployment to the PWS.
 
-
 ## :ballot_box_with_check: Create a README.md that contains a link to the PWS application that has been deployed, as well as answers to the following questions.
 To create a README.md, simply open the used IDE (VS code) and add a `README.md` file to the project directory `thrifting-haven`.
 
-## :bar_chart: The diagram that contains the request client to a Django-based web application and the response it gives, and explain the relationship between urls.py, views.py, models.py, and the html file.
-
+## :bar_chart: Diagram that contains the request client to a Django-based web application and the response it gives, explaining the relationship between urls.py, views.py, models.py, and the html file
+![diagram](diagram.png)
++ The user's request will first be processed and then forwarded to the appropriate view.
++ The view will then read/write data from the Model and use a Template to display and return the response to the user.
 
 ## :outbox_tray: The use of git in software development 
 
