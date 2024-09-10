@@ -87,7 +87,7 @@ class Product(models.Model):
     condition = models.CharField(max_length=100)
 ```
 
-### :ballot_box_with_check: Create a function in views.py to return to an HTML template that displays the name of the application and your name and class.
+### :ballot_box_with_check: Create a function in `views.py` to return to an HTML template that displays the name of the application and your name and class
 The code declares the show_main function, which accepts a request parameter. We hereby add a function that will handle HTTP requests and return the appropriate view such as the following:
 ```
 from django.shortcuts import render
@@ -102,7 +102,7 @@ def show_main(request):
     return render(request, "main.html", context)
 ```
 
-### :ballot_box_with_check: Create a routing in urls.py for the application main to map the function created in views.py.
+### :ballot_box_with_check: Create a routing in `urls.py` for the application `main` to map the function created in `views.py`
 To add a URL route in the project's urls.py to connect it to the main view we need to open the `urls.py` file inside of the `thrifting_haven` project directory, not the one inside the `main` directory.
 
 + Import the include function from django.urls.
@@ -129,15 +129,15 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1","kusuma-ratih-thriftinghaven.pbp.cs.ui
 ```
 + Do a git `add`, `commit`, and `push` for deployment to the PWS.
 
-## :ballot_box_with_check: Create a README.md that contains a link to the PWS application that has been deployed, as well as answers to the following questions.
+## :ballot_box_with_check: Create a `README.md` that contains a link to the PWS application that has been deployed
 To create a README.md, simply open the used IDE (VS code) and add a `README.md` file to the project directory `thrifting-haven`.
 
-## :bar_chart: Diagram that contains the request client to a Django-based web application and the response it gives, explaining the relationship between urls.py, views.py, models.py, and the html file
+## :bar_chart: Diagram that contains the request client to a Django-based web application and the response it gives, explaining the relationship between `urls.py`, `views.py`, `models.py`, and the `html` file
 ![diagram](diagram.png)
 + The user's request will first be processed and then forwarded to the appropriate view.
 + The view will then read/write data from the Model and use a Template to display and return the response to the user.
 
-## :outbox_tray: The use of git in software development 
+## :outbox_tray: The use of `git` in software development 
 
 Git is essential in software development for managing code versions and enabling collaboration. It allows multiple developers to work on different parts of a project simultaneously by using branches, which can later be merged into the main codebase. Git also tracks changes, providing a history of modifications that makes it easy to revert to previous versions if needed. It also integrates with platforms like GitHub or GitLab, facilitating code reviews and ensuring code quality. 
 
