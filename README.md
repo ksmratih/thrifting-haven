@@ -5,7 +5,7 @@ http://kusuma-ratih-thriftinghaven.pbp.cs.ui.ac.id/
 
 ## :memo: How to implement the checklist
 
-### :black_square_button: Create a new Django Project
+### :ballot_box_with_check: Create a new Django Project
 In order to create a new Django Project we have to:
 + Create a new directory named `thrifting-haven` and open the command prompt inside the new directory.
 + Create a virtual environment by running the command below
@@ -44,7 +44,7 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 python manage.py runserver
 ```
 
-### :black_square_button: Create an application with the name `main` in the project
+### :ballot_box_with_check: Create an application with the name `main` in the project
 
 Create a new application called `main` inside the `thrifting-haven` project by running the following command
 ```
@@ -58,7 +58,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-### :black_square_button: Perform routing in the project so that the application main can run
+### :ballot_box_with_check: Perform routing in the project so that the application main can run
 In order to configure the URL routing for the 'main' application we need to:
 + Create a `urls.py` file in the `main` directory with the following contents:
 ```
@@ -72,7 +72,7 @@ urlpatterns = [
 ]
 ```
 
-### :black_square_button: Create a model in the application `main` with the name `Product` 
+### :ballot_box_with_check: Create a model in the application `main` with the name `Product` 
 The following needs to be put into `models.py` in order to have the following attributes:
 + `name` as the name of the item with type CharField.
 + `price` as the price of the item with type IntegerField.
@@ -87,7 +87,7 @@ class Product(models.Model):
     condition = models.CharField(max_length=100)
 ```
 
-###  :black_square_button: Create a function in views.py to return to an HTML template that displays the name of the application and your name and class.
+### :ballot_box_with_check: Create a function in views.py to return to an HTML template that displays the name of the application and your name and class.
 The code declares the show_main function, which accepts a request parameter. We hereby add a function that will handle HTTP requests and return the appropriate view such as the following:
 ```
 from django.shortcuts import render
@@ -102,7 +102,7 @@ def show_main(request):
     return render(request, "main.html", context)
 ```
 
-### :black_square_button: Create a routing in urls.py for the application main to map the function created in views.py.
+### :ballot_box_with_check: Create a routing in urls.py for the application main to map the function created in views.py.
 To add a URL route in the project's urls.py to connect it to the main view we need to open the `urls.py` file inside of the `thrifting_haven` project directory, not the one inside the `main` directory.
 
 + Import the include function from django.urls.
@@ -120,7 +120,7 @@ urlpatterns = [
 ]
 ```
 
-### :black_square_button: Perform deployment to PWS so that it can be accessed by others via the Internet
+### :ballot_box_with_check: Perform deployment to PWS so that it can be accessed by others via the Internet
 In order to deploy to PWS at https://pbp.cs.ui.ac.id we have to:
 + create a new project labeled as `thriftinghaven`
 + on the `settings.py` file of the Django project, add the PWS deployment URL to the ALLOWED_HOSTS field such as shown below
@@ -130,10 +130,10 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1","kusuma-ratih-thriftinghaven.pbp.cs.ui
 + Do a git `add`, `commit`, and `push` for deployment to the PWS.
 
 
-## :black_square_button: Create a README.md that contains a link to the PWS application that has been deployed, as well as answers to the following questions.
+## :ballot_box_with_check: Create a README.md that contains a link to the PWS application that has been deployed, as well as answers to the following questions.
+To create a README.md, simply open the used IDE (VS code) and add a `README.md` file to the project directory `thrifting-haven`.
 
-
-## The diagram that contains the request client to a Django-based web application and the response it gives, and explain the relationship between urls.py, views.py, models.py, and the html file.
+## :bar_chart: The diagram that contains the request client to a Django-based web application and the response it gives, and explain the relationship between urls.py, views.py, models.py, and the html file.
 
 
 ## :outbox_tray: The use of git in software development 
