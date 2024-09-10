@@ -1,4 +1,4 @@
-# :handbag: :scarf: Thrifting Haven :shoe: :coat:
+# :handbag::scarf: Thrifting Haven :boot::coat:
 
 ## :paperclip: PWS application:
 http://kusuma-ratih-thriftinghaven.pbp.cs.ui.ac.id/
