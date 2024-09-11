@@ -1,5 +1,41 @@
-<h1>{{ application_name }} </h1>
-<h5>Name: </h5>
+{% extends 'base.html' %}
+{% block content %}
+<h1>Thrifting Haven</h1>
+
+<h5>Name:</h5>
 <p>{{ name }}</p>
-<h5>Class: </h5>
+
+<h5>Class:</h5>
 <p>{{ class }}</p>
+
+{% if not product_entries %}
+<p>There are no products in thrifting haven.</p>
+{% else %}
+<table>
+  <tr>
+    <th>Product Name</th>
+    <th>Price</th>
+    <th>Description</th>
+    <th>Condition</th>
+  </tr>
+
+  {% comment %} This is how to display product
+  {% endcomment %} 
+  {% for product_entry in product_entries %}
+  <tr>
+    <td>{{product_entry.name}}</td>
+    <td>{{product_entry.price}}</td>
+    <td>{{product_entry.description}}</td>
+    <td>{{product_entry.condition}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<br />
+
+<a href="{% url 'main:create_product' %}">
+  <button>Add New Product</button>
+</a>
+
+{% endblock content %}
