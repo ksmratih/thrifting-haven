@@ -193,6 +193,7 @@ def create_product(request):
     context = {'form': form}
     return render(request, "create_product.html", context)
 ```
+#LANJUT NANTI
 
 ### :ballot_box_with_check: Add 4 views to view the added objects in XML, JSON, XML by ID, and JSON by ID formats
 
@@ -244,16 +245,3 @@ The is_valid() method in Django forms checks if the data entered into the form i
 
 The `csrf_token` in Django forms is essential to protect against Cross-Site Request Forgery (CSRF) attacks, which occur when a malicious website tricks a user into making unwanted requests to another site where they are authenticated. By using `csrf_token`, Django ensures that form submissions are legitimate and come from the same user who loaded the page. Without it, attackers could exploit this vulnerability by tricking users into performing unintended actions, such as changing account settings or transferring funds, potentially compromising the security of the web application.
 
-## Postman Results
-
-# XML
-![xml](images/xml.png)
-
-# JSON 
-![json](images/json.png)
-
-# XML by ID
-![xml by ID](images/xml%20by%20id.png)
-
-# JSON by ID
-![json by ID](images/json%20by%20id.png)
