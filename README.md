@@ -246,7 +246,7 @@ The is_valid() method in Django forms checks whether the data entered is correct
 
 The `csrf_token` in Django forms is essential to protect against Cross-Site Request Forgery (CSRF) attacks, which occur when a malicious website tricks a user into making unwanted requests to another site where they are authenticated. By using `csrf_token`, Django ensures that form submissions are legitimate and come from the same user who loaded the page. Without it, attackers could exploit this vulnerability by tricking users into performing unintended actions, such as changing account settings or transferring funds, potentially compromising the security of the web application.
 
-## :postbox: Postman Results
+## :postbox: Postman Result
 
 ### XML
 ![xml](images/xml.png)
