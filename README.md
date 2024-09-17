@@ -240,7 +240,7 @@ JSON is more popular than XML primarily due to its simplicity and ease of use. J
 
 The is_valid() method in Django forms checks if the data entered into the form is correct and follows the required rules, such as proper format and completeness. If the data is valid, it returns True and stores the cleaned data for further processing; if not, it returns False and provides error messages. This method is essential to ensure that only valid and safe data is submitted and used, preventing errors and security issues in the application.
 
-##  Why we need `csrf_token` when creating a form in Django? What could happen if we did not use csrf_token on a Django form? How could this be leveraged by an attacker?
+## :minidisc: Why we need `csrf_token` when creating a form in Django? What could happen if we did not use csrf_token on a Django form? How could this be leveraged by an attacker?
 
 The `csrf_token` in Django forms is essential to protect against Cross-Site Request Forgery (CSRF) attacks, which occur when a malicious website tricks a user into making unwanted requests to another site where they are authenticated. By using `csrf_token`, Django ensures that form submissions are legitimate and come from the same user who loaded the page. Without it, attackers could exploit this vulnerability by tricking users into performing unintended actions, such as changing account settings or transferring funds, potentially compromising the security of the web application.
 
