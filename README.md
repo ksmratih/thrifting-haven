@@ -215,8 +215,9 @@ def show_json_by_id(request, id):
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 ```
 
-### :ballot_box_with_check: Create URL routing for each of the views added in point 2.
+### :ballot_box_with_check: Create URL routing for each of the views added
 
+To create URL routing for each of the views added we have to:
 + Open the `urls.py` file in the `main` directory and import the previous functions such as the following
 ```
 from main.views import show_main, create_mood_entry, show_xml, show_json, show_xml_by_id, show_json_by_id
@@ -231,16 +232,17 @@ from main.views import show_main, create_mood_entry, show_xml, show_json, show_x
 
 ## :mailbox_with_mail: Why we need data delivery in implementing a platform
 
-The main reason data delivery is essential in implementing a platform is to ensure that users receive the information they need quickly and accurately, enabling seamless interaction with the platform. This enhances the user experience by ensuring real-time data access, maintaining data consistency, and supporting essential platform functions like displaying content, processing transactions, and integrating with external systems, all while ensuring performance, scalability, and security.
+The main reason data delivery is essential in implementing a platform is to ensure that users receive the information they need quickly and accurately, enabling seamless interaction with the platform. This enhances the user experience by ensuring real-time data access, maintaining data consistency, and supporting essential platform functions like displaying content, processing transactions, and integrating with external systems, all while ensuring performance and security.
 
-## XML or JSON? Why is JSON more popular than XML?
-JSON is more popular than XML primarily due to its simplicity and ease of use. JSON (JavaScript Object Notation) has a more compact and readable syntax, making it easier for developers to write, parse, and debug. Since JSON is closely aligned with JavaScript, which is widely used in web development, it integrates seamlessly with modern web technologies, while XML requires more verbose syntax and can be harder to read. JSON's lightweight structure and native support in many programming languages make it faster and more efficient, especially for web APIs, which prefer simplicity and speed. In contrast, XML's additional features like namespaces and schemas are often unnecessary for many modern applications.
+## :file_folder: XML or JSON? Why is JSON more popular than XML?
 
-## The functional usage of `is_valid()` method in Django forms. Also explain why we need the method in forms.
+I prefer JSON over XML because it's simpler and easier to work with. JSON has a compact, readable format that's quicker to write, parse, and debug compared to XML, which can be more complex and harder to read. Since JSON works well with JavaScript and other programming languages, it's perfect for modern web development and APIs where speed and efficiency are important. While XML has extra features like namespaces and schemas, these are often not needed for most applications today, which is why JSON is more popular.
 
-The is_valid() method in Django forms checks if the data entered into the form is correct and follows the required rules, such as proper format and completeness. If the data is valid, it returns True and stores the cleaned data for further processing; if not, it returns False and provides error messages. This method is essential to ensure that only valid and safe data is submitted and used, preventing errors and security issues in the application.
+## :clipboard: The functional usage of `is_valid()` method in Django forms and why we need the method in forms
 
-## :minidisc: Why we need `csrf_token` when creating a form in Django? What could happen if we did not use csrf_token on a Django form? How could this be leveraged by an attacker?
+The is_valid() method in Django forms checks whether the data entered is correct and follows the required rules, such as completeness and proper format. If the data is valid, it returns True and stores the cleaned data for further processing. If not, it returns False and provides error messages. This method is crucial to ensure that only valid and safe data is processed, preventing errors and security risks in the application, and providing feedback to users to correct any mistakes before submitting the form.
+
+## :minidisc: Why we need `csrf_token` when creating a form in Django
 
 The `csrf_token` in Django forms is essential to protect against Cross-Site Request Forgery (CSRF) attacks, which occur when a malicious website tricks a user into making unwanted requests to another site where they are authenticated. By using `csrf_token`, Django ensures that form submissions are legitimate and come from the same user who loaded the page. Without it, attackers could exploit this vulnerability by tricking users into performing unintended actions, such as changing account settings or transferring funds, potentially compromising the security of the web application.
 
