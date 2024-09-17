@@ -229,7 +229,7 @@ from main.views import show_main, create_mood_entry, show_xml, show_json, show_x
     path('json/<str:id>/', show_json_by_id, name='show_json_by_id'),
 ```
 
-## Why we need data delivery in implementing a platform
+## :mailbox_with_mail: Why we need data delivery in implementing a platform
 
 The main reason data delivery is essential in implementing a platform is to ensure that users receive the information they need quickly and accurately, enabling seamless interaction with the platform. This enhances the user experience by ensuring real-time data access, maintaining data consistency, and supporting essential platform functions like displaying content, processing transactions, and integrating with external systems, all while ensuring performance, scalability, and security.
 
@@ -246,14 +246,14 @@ The `csrf_token` in Django forms is essential to protect against Cross-Site Requ
 
 ## :postbox: Postman Results
 
-# XML
+### XML
 ![xml](images/xml.png)
 
-# JSON 
+### JSON 
 ![json](images/json.png)
 
-# XML by ID
+### XML by ID
 ![xml by ID](images/xml%20by%20id.png)
 
-# JSON by ID
+### JSON by ID
 ![json by ID](images/json%20by%20id.png)
