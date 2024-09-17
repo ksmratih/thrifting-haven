@@ -234,7 +234,7 @@ from main.views import show_main, create_mood_entry, show_xml, show_json, show_x
 
 The main reason data delivery is essential in implementing a platform is to ensure that users receive the information they need quickly and accurately, enabling seamless interaction with the platform. This enhances the user experience by ensuring real-time data access, maintaining data consistency, and supporting essential platform functions like displaying content, processing transactions, and integrating with external systems, all while ensuring performance and security.
 
-## :file_folder: XML or JSON? Why is JSON more popular than XML?
+## :file_folder: XML or JSON
 
 I prefer JSON over XML because it's simpler and easier to work with. JSON has a compact, readable format that's quicker to write, parse, and debug compared to XML, which can be more complex and harder to read. Since JSON works well with JavaScript and other programming languages, it's perfect for modern web development and APIs where speed and efficiency are important. While XML has extra features like namespaces and schemas, these are often not needed for most applications today, which is why JSON is more popular.
 
@@ -246,7 +246,7 @@ The is_valid() method in Django forms checks whether the data entered is correct
 
 The `csrf_token` in Django forms is essential to protect against Cross-Site Request Forgery (CSRF) attacks, which occur when a malicious website tricks a user into making unwanted requests to another site where they are authenticated. By using `csrf_token`, Django ensures that form submissions are legitimate and come from the same user who loaded the page. Without it, attackers could exploit this vulnerability by tricking users into performing unintended actions, such as changing account settings or transferring funds, potentially compromising the security of the web application.
 
-## :postbox: Postman Result
+## :postbox: Postman Results
 
 ### XML
 ![xml](images/xml.png)
