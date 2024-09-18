@@ -193,6 +193,13 @@ def create_product(request):
     context = {'form': form}
     return render(request, "create_product.html", context)
 ```
++ Create a HTML template to display the form and add it to `urls.py` in the `main` directory
+```
+urlpatterns = [
+    path('', show_main, name='show_main'),
+    path('create-product', create_product, name='create_product'),
+]
+```
 
 ### :ballot_box_with_check: Add 4 views to view the added objects in XML, JSON, XML by ID, and JSON by ID formats
 
