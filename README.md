@@ -1,5 +1,9 @@
 # :handbag::scarf: Thrifting Haven :boot::coat:
 
+<details>
+<Summary><b>Assignment 2</b></summary>
+
+
 ## [ASSIGNMENT 2](https://pbp-fasilkom-ui.github.io/ganjil-2025/en/assignments/individual/assignment-2)
 
 ## :paperclip: PWS application:
@@ -151,6 +155,12 @@ Django is a popular choice for beginners because it’s simple, easy to understa
 
 Django’s model is called an ORM (Object-Relational Mapper) because it helps you work with databases using Python code instead of writing SQL queries. It turns Python classes into database tables and class attributes into table columns. This makes it easier to manage the database, letting you add, update, or delete data using Python without needing to learn SQL.
 
+</details>
+
+<details>
+<Summary><b>Assignment 3</b></summary>
+
+
 ## [ASSIGNMENT 3](https://pbp-fasilkom-ui.github.io/ganjil-2025/en/assignments/individual/assignment-3)
 
 ### :ballot_box_with_check: Creating a form input to add a model
@@ -266,3 +276,224 @@ The `csrf_token` in Django forms is essential to protect against Cross-Site Requ
 
 ### JSON by ID
 ![json by ID](images/json%20by%20id.png)
+
+</details>
+
+<details>
+<Summary><b>Assignment 4</b></summary>
+
+
+## [ASSIGNMENT 4](https://pbp-fasilkom-ui.github.io/ganjil-2025/en/assignments/individual/assignment-4)
+
+
+### :ballot_box_with_check: Implement the register, login, and logout functions
+
+In order to implement the Register we need to 
++ Import `UserCreationForm` and `messages` into `views.py` in the main subdirectory
+```
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+```
++ Add the `register` function
+```
+def register(request):
+    form = UserCreationForm()
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your account has been successfully created!')
+            return redirect('main:login')
+    context = {'form':form}
+    return render(request, 'register.html', context)
+```
++ Create a new HTML file named `register.html`
++ Import the `register` function into `urls.py` and add the URL path to `urlpatterns`
+```
+from main.views import register
+...
+ urlpatterns = [
+     ...
+     path('register/', register, name='register'),
+ ]
+```
+In order to implement a Login Function we need to
++ Import `authenticate`, `login`, and `AuthenticationForm` into `views.py`
+```
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import authenticate, login
+```
++ Add the `login_user` function
+```
+def login_user(request):
+   if request.method == 'POST':
+      form = AuthenticationForm(data=request.POST)
+
+      if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('main:show_main')
+
+   else:
+      form = AuthenticationForm(request)
+   context = {'form': form}
+   return render(request, 'login.html', context)
+```
++ Create a new HTML file named `login.html`
++ Import the `login_user` function into `urls.py` and add a URL path to `urlpatterns`
+```
+from main.views import login_user
+...
+urlpatterns = [
+   ...
+   path('login/', login_user, name='login'),
+]
+```
+Lastly we need to implement the Logout Function
++ Import `logout` in `views.py`
+```
+from django.contrib.auth import logout
+```
++ Add the `logout_user` function to `views.py`
+```
+def logout_user(request):
+    logout(request)
+    return redirect('main:login')
+```
++ In the `main.html` file we add the following hyperlink tag
+```
+<a href="{% url 'main:logout' %}">
+  <button>Logout</button>
+</a>
+```
++ In `urls.py` import the `logout_user` function and finally, we add the URL path to `urlpatterns` such as the following
+```
+from main.views import logout_user
+...
+urlpatterns = [
+   ...
+   path('logout/', logout_user, name='logout'),
+]
+```
+### :ballot_box_with_check: Make two accounts with three dummy data
+
+### :ballot_box_with_check: Connect the models `Product` and `User`
+
+In order to connect the models `Product` and `User` in `models.py` you need to:
++ Add the import
+```
+from django.contrib.auth.models import User
+```
++ Modify the `Product` model
+```
+class Product(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+```
+In `views.py`, you need to:
++ Update `create_product`
+```
+def create_product(request):
+    form = ThriftEntryForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        thrift_entry = form.save(commit=False)
+        thrift_entry.user = request.user
+        thrift_entry.save()
+        return redirect('main:show_main')
+
+    context = {'form': form}
+    return render(request, "create_product.html", context)
+```
++ Update `show_main`
+```
+def show_main(request):
+    thrift_entries = Product.objects.filter(user=request.user)
+
+    context = {
+         'name': request.user.username,
+         ...
+    }
+...
+```
+We then run the model migration with
+```
+python manage.py makemigrations
+python manage.py migrate
+```
+Lastly, we add another statement in `settings.py` in the thrifting_haven subdirectory
+```
+import os
+```
+Then, change the variable `DEBUG` into the following
+```
+PRODUCTION = os.getenv("PRODUCTION", False)
+DEBUG = not PRODUCTION
+```
+We then test by making another account and seeing whether the previous Product entry will not be displayed on the page of the new account.
+
+### :ballot_box_with_check: Display logged in user details and apply cookies like last login
+
+In order to apply cookies and display the logged in user details you need to:
++ In `views.py` import the following
+```
+import datetime
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+```
++ In the `login_user` function, to track when the user last logged in we replace the code in the `if form.isvalid()` block with the following
+```
+...
+if form.is_valid():
+    user = form.get_user()
+    login(request, user)
+    response = HttpResponseRedirect(reverse("main:show_main"))
+    response.set_cookie('last_login', str(datetime.datetime.now()))
+    return response
+...
+```
++ In the `show_main` function, we add the to the `context` variable
+```
+context = {
+    ...
+    'last_login': request.COOKIES['last_login'],
+}
+```
++ Modify the `logout_user` function
+```
+def logout_user(request):
+    logout(request)
+    response = HttpResponseRedirect(reverse('main:login'))
+    response.delete_cookie('last_login')
+    return response
+```
++ To display the last login data in `main.html` add the following
+```
+...
+<h5>Last login session: {{ last_login }}</h5>
+...
+```
+
+# The difference between `HttpResponseRedirect()` and `redirect()`
+
+The main difference between `HttpResponseRedirect()` and `redirect()` is in their flexibility. `HttpResponseRedirect()` requires a URL as its first argument, meaning you can only redirect to a specific URL. On the other hand, `redirect()` is more versatile as it ultimately returns an `HttpResponseRedirect`, but it allows you to pass in a model, view name, or URL as its argument. This makes `redirect()` more convenient for various use cases.
+
+## How the `Product` model is linked with `User`
+
+The `Product` model is linked to the `User` model through a ForeignKey, where each `Product` belongs to a single `User`, but a user can have multiple products. The `on_delete=models.CASCADE` option ensures that if a user is deleted, their associated products are also removed. In the view, when a user creates a product, it's linked to them via `thrift_entries = Product.objects.filter(user=request.user)`Additionally, product entries are filtered by the logged-in user, ensuring users only see their own entries. This setup allows the application to track and display products on a per-user basis.
+
+
+## The difference between authentication and authorization, what happens when a user logs in
+
+Authentication is the process of verifying a user’s identity by checking their credentials, typically a username and password. When a user logs in, Django verifies these credentials through its built-in authentication system. If the details are correct, Django creates a session, allowing the user to stay logged in as they navigate through the site. Django implements authentication using the User model and authentication backends, with the default being the username-password system, though other methods like OAuth can be integrated.
+
+Authorization determines what an authenticated user is allowed to do within the application. Once a user is logged in, Django uses permissions and groups to manage access control, ensuring users can only access resources or perform actions they’re permitted to. This is handled through checks like request.user.is_authenticated and permission classes for views. Django’s admin system, for example, uses these permissions to control which users can manage specific models or data.
+
+
+## How does Django remember logged-in users? Explain other uses of cookies and whether all cookies are safe to use.
+
+Django remembers logged-in users by storing a session ID in a cookie on the user's browser. This session ID helps Django retrieve the user's session data from the server, allowing them to stay logged in as they navigate the site.
+
+Cookies are also used for purposes like tracking user preferences or analytics, but not all cookies are safe. Sensitive data should never be stored directly in cookies, and security measures like HttpOnly, Secure, and SameSite should be applied to protect against attacks like XSS and CSRF.
+
+</details>
