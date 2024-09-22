@@ -1,13 +1,14 @@
 # :handbag::scarf: Thrifting Haven :boot::coat:
 
+## :link: PWS application:
+http://kusuma-ratih-thriftinghaven.pbp.cs.ui.ac.id/
+
+
 <details>
 <Summary><b>Assignment 2</b></summary>
 
 
 ## [ASSIGNMENT 2](https://pbp-fasilkom-ui.github.io/ganjil-2025/en/assignments/individual/assignment-2)
-
-## :paperclip: PWS application:
-http://kusuma-ratih-thriftinghaven.pbp.cs.ui.ac.id/
 
 ## :memo: How to implement the checklist
 
@@ -474,7 +475,7 @@ def logout_user(request):
 ...
 ```
 
-# The difference between `HttpResponseRedirect()` and `redirect()`
+## :globe_with_meridians: The difference between `HttpResponseRedirect()` and `redirect()`
 
 The main difference between `HttpResponseRedirect()` and `redirect()` is in their flexibility. `HttpResponseRedirect()` requires a URL as its first argument, meaning you can only redirect to a specific URL. On the other hand, `redirect()` is more versatile as it ultimately returns an `HttpResponseRedirect`, but it allows you to pass in a model, view name, or URL as its argument. This makes `redirect()` more convenient for various use cases.
 
