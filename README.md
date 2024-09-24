@@ -417,21 +417,21 @@ def show_main(request):
     }
 ...
 ```
-We then run the model migration with
++ Run the model migration with
 ```
 python manage.py makemigrations
 python manage.py migrate
 ```
-Lastly, we add another statement in `settings.py` in the thrifting_haven subdirectory
++ Add another statement in `settings.py` in the thrifting_haven subdirectory
 ```
 import os
 ```
-Then, change the variable `DEBUG` into the following
++ Change the variable `DEBUG` into the following
 ```
 PRODUCTION = os.getenv("PRODUCTION", False)
 DEBUG = not PRODUCTION
 ```
-We then test by making another account and seeing whether the previous Product entry will not be displayed on the page of the new account.
++ Test by making another account and seeing whether the previous Product entry will not be displayed on the page of the new account.
 
 ### :ballot_box_with_check: Display logged in user details and apply cookies like last login
 
@@ -479,19 +479,19 @@ def logout_user(request):
 
 The main difference between `HttpResponseRedirect()` and `redirect()` is in their flexibility. `HttpResponseRedirect()` requires a URL as its first argument, meaning you can only redirect to a specific URL. On the other hand, `redirect()` is more versatile as it ultimately returns an `HttpResponseRedirect`, but it allows you to pass in a model, view name, or URL as its argument. This makes `redirect()` more convenient for various use cases.
 
-## How the `Product` model is linked with `User`
+## :desktop_computer: How the `Product` model is linked with `User`
 
 The `Product` model is linked to the `User` model through a ForeignKey, where each `Product` belongs to a single `User`, but a user can have multiple products. The `on_delete=models.CASCADE` option ensures that if a user is deleted, their associated products are also removed. In the view, when a user creates a product, it's linked to them via `thrift_entries = Product.objects.filter(user=request.user)`Additionally, product entries are filtered by the logged-in user, ensuring users only see their own entries. This setup allows the application to track and display products on a per-user basis.
 
 
-## The difference between authentication and authorization, what happens when a user logs in
+## :keyboard: The difference between authentication and authorization, what happens when a user logs in
 
 Authentication is the process of verifying a user’s identity by checking their credentials, typically a username and password. When a user logs in, Django verifies these credentials through its built-in authentication system. If the details are correct, Django creates a session, allowing the user to stay logged in as they navigate through the site. Django implements authentication using the User model and authentication backends, with the default being the username-password system, though other methods like OAuth can be integrated.
 
 Authorization determines what an authenticated user is allowed to do within the application. Once a user is logged in, Django uses permissions and groups to manage access control, ensuring users can only access resources or perform actions they’re permitted to. This is handled through checks like request.user.is_authenticated and permission classes for views. Django’s admin system, for example, uses these permissions to control which users can manage specific models or data.
 
 
-## How does Django remember logged-in users? Explain other uses of cookies and whether all cookies are safe to use.
+## :cookie: How does Django remember logged-in users? Explain other uses of cookies and whether all cookies are safe to use.
 
 Django remembers logged-in users by storing a session ID in a cookie on the user's browser. This session ID helps Django retrieve the user's session data from the server, allowing them to stay logged in as they navigate the site.
 
