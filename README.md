@@ -379,6 +379,12 @@ urlpatterns = [
 ```
 ### :ballot_box_with_check: Make two accounts with three dummy data
 
+### account 1
+![account 1](images/account%201.png)
+
+### account 2
+![account 2](images/account%202.png)
+
 ### :ballot_box_with_check: Connect the models `Product` and `User`
 
 In order to connect the models `Product` and `User` in `models.py` you need to:
