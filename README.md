@@ -504,3 +504,63 @@ Django remembers logged-in users by storing a session ID in a cookie on the user
 Cookies are also used for purposes like tracking user preferences or analytics, but not all cookies are safe. Sensitive data should never be stored directly in cookies, and security measures like HttpOnly, Secure, and SameSite should be applied to protect against attacks like XSS and CSRF.
 
 </details>
+
+<details>
+<Summary><b>Assignment 5</b></summary>
+
+
+### :ballot_box_with_check: Implement Functions to delete and edit products
+
+In order to add the `edit_product` and `delete_product` functions
++ In `views.py` we add and import
+```
+from django.shortcuts import .., reverse
+from django.http import .., HttpResponseRedirect
+...
+def edit_product(request, id):
+    product = Product.objects.get(pk = id)
+
+    form = ThriftEntryForm(request.POST or None, instance=product)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_product.html", context)
+
+def delete_product(request, id):
+    product = Product.objects.get(pk = id)
+    product.delete()
+    return HttpResponseRedirect(reverse('main:show_main'))
+```
++ In `urls.py` we add and import
+```
+from main.views import edit_product, delete_product
+...
+urlpatterns = [
+    ...
+    path('edit-product/<uuid:id>', edit_product, name='edit_product'),
+    path('delete/<uuid:id>', delete_product, name='delete_product'),
+]
+```
+
+
+## :arrows_clockwise: The priority order of these CSS selectors if there are multiple CSS selectors for an HTML element
+
+In CSS, the priority order of selectors is based on specificity. Inline styles have the highest precedence, followed by ID selectors, then class, attribute, and pseudo-class selectors, and finally, type selectors. If selectors have the same specificity, the last one in the CSS file takes precedence, overriding earlier rules.
+
+## :twisted_rightwards_arrows: Why responsive design becomes an important concept in web application development
+
+Responsive design is crucial in web development as it ensures websites adapt to various screen sizes and devices, providing a better user experience. Applications like YouTube and Airbnb effectively use responsive design, making their sites user-friendly on mobile and desktop. In contrast, the AREN website lacks responsiveness, leading to poor usability on mobile devices.
+
+## :signal_strength: The differences between margin, border, and padding, and how to implement these three things
+
+In CSS, margin, border, and padding are different properties that define the spacing and structure around an element. Margin creates space outside the element's border, separating it from other elements. Border is the outline around the element's content, while padding adds space inside the border, between the content and the border.
+
+## :vibration_mode: The concepts of flex box and grid layout along with their uses
+
+Flexbox and grid layout are two powerful CSS layout systems. Flexbox is a one-dimensional layout tool used for aligning items in rows or columns, making it ideal for smaller layouts. Grid layout, on the other hand, is a two-dimensional system that enables the arrangement of items in rows and columns, making it more suited for complex layouts like web pages with multiple sections or areas.
+
+
+</details>
