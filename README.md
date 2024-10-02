@@ -545,6 +545,186 @@ urlpatterns = [
 ]
 ```
 
+### :ballot_box_with_check: Customize the design of the HTML templates that have been created in previous assignments using CSS
+```
+<head>
+{% block meta %}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% endblock meta %}
+<script src="https://cdn.tailwindcss.com">
+</script>
+</head>
+```
+
+### :ballot_box_with_check: Customize the product list page to be more attractive and responsive
+
+I modified the `main.html` file to look like the following:
+```
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta %}
+<title>Thrifting Haven</title>
+{% endblock meta %}
+{% block content %}
+{% include 'navbar.html' %}
+<div class="overflow-x-hidden px-4 md:px-8 pb-8 pt-24 min-h-screen bg-yellow-950 flex flex-col"
+     style="background-image: url('{% static 'image/background6.jpg' %}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+
+  <div class="p-2 mb-6 relative">
+    <div class="relative grid grid-cols-1 z-30 md:grid-cols-3 gap-8">
+
+      {% include "card_info.html" with title='Name' value=name %}
+      {% include "card_info.html" with title='Class' value=class %}
+    </div>
+</div>
+    <div class="px-3 mb-4">
+      <div class="flex rounded-md items-center bg-sky-950 py-2 px-4 w-fit">
+        <h1 class="text-white text-center">Last Login: {{last_login}}</h1>
+      </div>
+    </div>
+    <div class="flex justify-end mb-6">
+        <a href="{% url 'main:create_product' %}" class="bg-sky-950 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+            Add New Product Entry
+        </a>
+    </div>
+    
+    {% if not thrift_entries %}
+    <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
+        <img src="{% static 'image/very-sad.png' %}" alt="Sad face" class="w-32 h-32 mb-4"/>
+        <p class="text-center text-gray-600 mt-4">There are no products in Thrifting Haven.</p>
+    </div>
+    {% else %}
+    <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6 w-full">
+        {% for thrift_entry in thrift_entries %}
+            {% include 'card_product.html' with thrift_entry=thrift_entry %}
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}
+```
+### :ballot_box_with_check: The product list page will display details of each product using cards, for each product card, create two buttons to edit and delete the product on that card
+In `card_product.html` I insert the following:
+```
+<div class="relative break-inside-avoid">
+    <!-- Floating items on top -->
+    <div class="absolute top-2 z-10 left-1/2 -translate-x-1/2 flex items-center -space-x-2">
+        <div class="w-[3rem] h-8 bg-gray-200 rounded-md opacity-80 -rotate-90"></div>
+        <div class="w-[3rem] h-8 bg-gray-200 rounded-md opacity-80 -rotate-90"></div>
+    </div>
+    
+    <!-- Main Product Card -->
+    <div class="relative top-5 bg-blue-100 shadow-md rounded-lg mb-6 break-inside-avoid flex flex-col border-2 border-blue-300 transform rotate-1 hover:rotate-0 transition-transform duration-300">
+        <div class="bg-blue-200 text-gray-800 p-4 rounded-t-lg border-b-2 border-blue-300">
+            <h3 class="font-bold text-xl mb-2">{{ thrift_entry.name }}</h3>
+            <p class="text-gray-600">{{ thrift_entry.description }}</p>
+        </div>
+        
+        <!-- Product Details -->
+        <div class="p-4">
+            <p class="font-semibold text-lg mb-2">Condition</p>
+            <p class="text-gray-700 mb-2">
+                <span class="bg-[linear-gradient(to_bottom,transparent_0%,transparent_calc(100%_-_1px),#CDC1FF_calc(100%_-_1px))] bg-[length:100%_1.5rem] pb-1">{{ thrift_entry.condition }}</span>
+            </p>
+
+            <!-- Price Section with Actual Price and Dollar Sign -->
+            <div class="mt-4">
+                <p class="text-gray-700 font-semibold mb-2">Price</p>
+                <div class="relative pt-1">
+                    <div class="flex mb-2 items-center justify-between">
+                        <div>
+                            <!-- Display actual price with dollar sign -->
+                            <span class="text-xl font-semibold inline-block py-1 px-2 uppercase rounded-full text-green-600 bg-green-200">
+                                ${{ thrift_entry.price }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons: Edit and Delete -->
+    <div class="absolute top-0 -right-4 flex space-x-1">
+        <!-- Edit Button -->
+        <a href="{% url 'main:edit_product' thrift_entry.pk %}" class="bg-yellow-500 hover:bg-yellow-600 text-white rounded-full p-2 transition duration-300 shadow-md">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+            </svg>
+        </a>
+        <!-- Delete Button -->
+        <a href="{% url 'main:delete_product' thrift_entry.pk %}" class="bg-red-500 hover:bg-red-600 text-white rounded-full p-2 transition duration-300 shadow-md">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+            </svg>
+        </a>
+    </div>
+</div>
+```
+
+### :ballot_box_with_check: Create a navigation bar (navbar) for the features in the application that is responsive to different device sizes
+In the root directory, in`templates` insert the `navbar.html` as the following:
+```
+<nav class="bg-sky-950 shadow-lg fixed top-0 left-0 z-40 w-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center">
+          <h1 class="text-2xl font-bold text-center text-white">Thrifting Haven</h1>
+        </div>
+        <div class="hidden md:flex items-center">
+          {% if user.is_authenticated %}
+            <span class="text-gray-300 mr-4">Welcome, {{ user.username }}</span>
+            <a href="{% url 'main:logout' %}" class="text-center bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+              Logout
+            </a>
+          {% else %}
+            <a href="{% url 'main:login' %}" class="text-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300 mr-2">
+              Login
+            </a>
+            <a href="{% url 'main:register' %}" class="text-center bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+              Register
+            </a>
+          {% endif %}
+        </div>
+        <div class="md:hidden flex items-center">
+          <button class="mobile-menu-button">
+            <svg class="w-6 h-6 text-white" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+              <path d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div class="mobile-menu hidden md:hidden  px-4 w-full md:max-w-full">
+      <div class="pt-2 pb-3 space-y-1 mx-auto">
+        {% if user.is_authenticated %}
+          <span class="block text-gray-300 px-3 py-2">Welcome, {{ user.username }}</span>
+          <a href="{% url 'main:logout' %}" class="block text-center bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+            Logout
+          </a>
+        {% else %}
+          <a href="{% url 'main:login' %}" class="block text-center bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300 mb-2">
+            Login
+          </a>
+          <a href="{% url 'main:register' %}" class="block text-center bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+            Register
+          </a>
+        {% endif %}
+      </div>
+    </div>
+    <script>
+      const btn = document.querySelector("button.mobile-menu-button");
+      const menu = document.querySelector(".mobile-menu");
+    
+      btn.addEventListener("click", () => {
+        menu.classList.toggle("hidden");
+      });
+    </script>
+  </nav>
+  ```
 
 ## :arrows_clockwise: The priority order of these CSS selectors if there are multiple CSS selectors for an HTML element
 
