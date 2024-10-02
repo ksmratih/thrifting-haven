@@ -546,7 +546,9 @@ urlpatterns = [
 ```
 
 ### :ballot_box_with_check: Customize the design of the HTML templates that have been created in previous assignments using CSS
+In the `base.html` file in `templates` of the root directory insert the following:
 ```
+...
 <head>
 {% block meta %}
     <meta charset="UTF-8" />
@@ -555,6 +557,7 @@ urlpatterns = [
 <script src="https://cdn.tailwindcss.com">
 </script>
 </head>
+...
 ```
 
 ### :ballot_box_with_check: Customize the product list page to be more attractive and responsive
