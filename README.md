@@ -759,7 +759,7 @@ Flexbox and grid layout are two powerful CSS layout systems. Flexbox is a one-di
 
 
 ### :ballot_box_with_check: Modify the codes in data cards to able to use AJAX GET
-In order for the codes in data cards to be able to use AJAX GET we use
+In order for the codes in data cards to be able to use AJAX GET we use:
 ```
 <div id="product_cards"></div>
 
@@ -864,7 +864,7 @@ const modal = document.getElementById('crudModal');
 ```
 
 ### :ballot_box_with_check: Create a new view function to add a new product entry to the database
-In `views.py` import and add the following function
+In `views.py` import and add the following function:
 ```
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
@@ -889,7 +889,7 @@ def add_product_ajax(request):
 ```
 
 ### :ballot_box_with_check: Create a `/create-ajax/` path that routes to the new view function you created
-In `urls.py` import and add the following
+In `urls.py` import and add the following:
 ```
 from main.views import ..., add_product_ajax
 
@@ -901,7 +901,7 @@ urlpatterns = [
 ```
 
 ### :ballot_box_with_check: Connect the form you created inside the modal to the /create-ajax/ path
-+ To connect the form we create a new function in the block `<script>` such as the following
++ To connect the form we create a new function in the block `<script>` such as the following:
 ```
 <script>
   function addProduct() {
@@ -926,7 +926,7 @@ urlpatterns = [
 ```
 
 ### :ballot_box_with_check: Perform asynchronous refresh on the main page to display the latest item list without reloading the entire main page
-Add the following code to the `main.html` file
+Add the following code to the `main.html` file:
 ```
 
   async function refreshProducts() {
@@ -1005,7 +1005,7 @@ Add the following code to the `main.html` file
 refreshProducts();
 ```
 
-## :black_nib: benefits of using JavaScript in developing web applications
+## :black_nib: Benefits of using JavaScript in developing web applications
 JavaScript enhances web applications by enabling interactivity and dynamic content, allowing users to engage with the site without full-page reloads. It supports client-side scripting, which improves user experience through real-time updates and smooth navigation. Additionally, various frameworks and libraries like React and Angular streamline development and allow for complex applications using less code. With the introduction of Node.js, JavaScript can also handle server-side logic, enabling full-stack development with a single language.
 
 ## :boomerang: Why we need to use await when we call fetch() and what would happen if we don't use await
